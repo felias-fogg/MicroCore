@@ -331,3 +331,18 @@ menu.bootloader=Bootloader
 13.menu.bootloader.rx_pb1_tx_pb0_+500.fuse.selfprogen=e
 13.menu.bootloader.rx_pb1_tx_pb0_+500.bootloader.file=urboot/watchdog_1_s/{bootloader.clock}/{bootloader.speed+500}/{bootloader.baudrate}_baud/swio_rxb1_txb0/no-led/urboot_attiny13a.hex
 13.menu.bootloader.rx_pb1_tx_pb0_+500.bootloader.flash=-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i
+
+#################### DEBUG FLAG HANDLING ####################
+menu.debug=Debug Compile Flags
+
+13.menu.debug.os=No Debug
+13.menu.debug.os.build.debug=
+13.menu.debug.og=Debug
+13.menu.debug.og.build.debug=-Og
+13.menu.debug.o0=Debug (no comp. optim.)
+13.menu.debug.o0.build.debug=-O0
+13.menu.debug.no-lto=Debug (no LTO)
+13.menu.debug.no-lto.build.debug=-Og -fno-lto
+13.menu.debug.no-ltoo0=Debug (no LTO, no comp. optim.)
+13.menu.debug.no-ltoo0.build.debug=-O0 -fno-lto
+13.build.extra_flags={build.debug} 
