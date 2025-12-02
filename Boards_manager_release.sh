@@ -18,17 +18,18 @@ REPOSITORY=MicroCore # Github repo name
 AVRDUDE_VERSION="8.0-arduino.1"
 
 # Get the version number of most recent PyAvrOCD version
-PAOVERSION=$(curl -s https://api.github.com/repos/$OWNER/PyAvrOCD/releases/latest | grep "tag_name" |  awk -F\" '{print $4}')
+PAOVERSION=$(curl -s https://api.github.com/repos/$PAOOWNER/PyAvrOCD/releases/latest | grep "tag_name" |  awk -F\" '{print $4}')
 AVROCDVERSION=${PAOVERSION#"v"}
 
 # Check whether already part of the index
-if grep "avrocd-tools-"${AVROCDVERSION} package_${REALAUTHOR}_${REPOSITORY}_index.json; then
-    echo "Current PyAvrOCD version already in index"
+echo "Checking whether current PyAvrOCD version ${AVROCDVERSION} is already in index" 
+if grep -q "avrocd-tools-"${AVROCDVERSION} package_${REALAUTHOR}_${REPOSITORY}_index.json; then
+    echo "Current PyAvrOCD version is in index"
 else
     echo "Current PyAvrOCD version is not in index. Add it first."
     exit 1
 fi
-    
+
 # Get the download URL for the latest release from Github
 DOWNLOAD_URL=$(curl -s https://api.github.com/repos/$AUTHOR/$REPOSITORY/releases/latest | grep "tarball_url" | awk -F\" '{print $4}')
 
